@@ -29,5 +29,7 @@ step 1.2: if bd file is not created, create db.sqlight3 next to manage.py
 step 1.3 : In app models.py create class and field which creates DB structure, (Note: uniq identifier with auto increment is not requuired because it will be created automaticly).
 step 1.4: In settings.py add created app in INSTSTALLES_APP section
 
-
+Step 2: 74: 
+step 2.1: run "python3 manage.py makemigrations" to create migrations file inside migration folder. now 0001_init.py file is created.
+step 2.2: run "python3 manage.py migrate" to create table in bd.sqlite3 file 
  
