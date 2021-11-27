@@ -26,7 +26,7 @@ You can initialize this repository with code from a Subversion, Mercurial, or TF
 step1: 73: create app & add to setting.py and create database field
 step 1.1: python3 manage.py startapp book_outlet
 step 1.2: if bd file is not created, create db.sqlight3 next to manage.py
-step 1.3 : In app models.py create class and field which creates DB structure, (Note: uniq identifier with auto increment is not requuired because it will be created automaticly).
+step 1.3: In app models.py create class and field which creates DB structure, (Note: uniq identifier with auto increment is not requuired because it will be created automaticly).
 step 1.4: In settings.py add created app in INSTSTALLES_APP section
 
 Step 2: 74: 
@@ -36,10 +36,21 @@ step 2.2: run "python3 manage.py migrate" to create table in bd.sqlite3 file
 Step 3 : 75,76 add data to DB using shell cmd line, and view
 (note: some changes where made on models.py file)
 step 3.1: now we are adding some books to the DB through shell command line, to open shell from terminal type "python3 manage.py shell", now follow the below steps to add books to DB.
-    from book_outlet.models import Book
-    Harry_Potter = Book(title = "Harry Potter and the Philosopher's Stone", rating = 5)
-    Harry_Potter.save()
-    lord_of_the_rings = Book(title = "Lord of the rings - Volume One", rating = 4
-    lord_of_the_rings.save()
+    >>> from book_outlet.models import Book
+    >>> Harry_Potter = Book(title = "Harry Potter and the Philosopher's Stone", rating = 5)
+    >>> Harry_Potter.save()
+    >>> lord_of_the_rings = Book(title = "Lord of the rings - Volume One", rating = 4
+    >>> lord_of_the_rings.save()
 step 3.2: now to view the entries that we made run below command, "objects.all()" will show the object that we created. like all() it has moe function .
-    Book.objects.all() 
+    >>> Book.objects.all() 
+
+step 4: 77: adding more field, setting validators, default value
+step 4.1: In models.py, define __str__ with f string to view the book entries, to view the entries you have the quit the shell and reload.
+step 4.2: now we have added new fileds author and is bestselling also set validator to rating by importing max and minlenghtvalidator, now run "makemigrations" and new file 0003 will be created. run "migrate" to add in the DB
+step 4.3: run below commands in shell to view the entries we created, we can used index, '.' field name to view the entry etc.
+    >>> from book_outlet.models import Book
+    >>> Book.objects.all()
+        <QuerySet [<Book: Harry Potter and the Philosopher's Stone,(5)>, <Book: Lord of the rings - Volume One,(4)>]>
+    >>> Book.objects.all()[1].author
+    >>> Book.objects.all()[1].is_bestselling
+        False
