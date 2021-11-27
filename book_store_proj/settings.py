@@ -29,8 +29,10 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# step 1.4: In settings.py add created app in INSTSTALLES_APP section
 
 INSTALLED_APPS = [
+    'book_outlet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
