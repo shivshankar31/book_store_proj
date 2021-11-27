@@ -33,3 +33,13 @@ Step 2: 74:
 step 2.1: run "python3 manage.py makemigrations" to create migrations file inside migration folder. now 0001_init.py file is created.
 step 2.2: run "python3 manage.py migrate" to create table in bd.sqlite3 file 
  
+Step 3 : 75,76 add data to DB using shell cmd line, and view
+(note: some changes where made on models.py file)
+step 3.1: now we are adding some books to the DB through shell command line, to open shell from terminal type "python3 manage.py shell", now follow the below steps to add books to DB.
+    from book_outlet.models import Book
+    Harry_Potter = Book(title = "Harry Potter and the Philosopher's Stone", rating = 5)
+    Harry_Potter.save()
+    lord_of_the_rings = Book(title = "Lord of the rings - Volume One", rating = 4
+    lord_of_the_rings.save()
+step 3.2: now to view the entries that we made run below command, "objects.all()" will show the object that we created. like all() it has moe function .
+    Book.objects.all() 
