@@ -136,4 +136,13 @@ step 5.6: how to increase performance?
 which is a bad code? the code which is not using catch, mean code which hit again and again for same result.
 
 
+step 6.1: 85: Bulk Operations
+    Besides operations on individual model instances (i.e. deleting one model instance, updating one model instance etc), you can also perform bulk operations:
+
+    You can delete multiple model instances (i.e. database records) at once: https://docs.djangoproject.com/en/3.1/topics/db/queries/#deleting-objects
+
+    You can update multiple model instances (i.e. database records) at once: https://docs.djangoproject.com/en/3.0/ref/models/querysets/#bulk-update
+
+    You can create multiple model instances (i.e. database records) at once: https://docs.djangoproject.com/en/3.0/ref/models/querysets/#bulk-create
+
 
