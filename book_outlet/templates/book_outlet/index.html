@@ -1,4 +1,5 @@
 <!step 7.2: create index.html!>
+<!step 8.1: In index.html use for loop and dynamicly generate list of all the book.!>
 
 {% extends 'book_outlet/base.html' %}
 
@@ -8,7 +9,9 @@
 
 {% block content %}
     <ul>
-        <li>Book-1</li>
+        {% for book in books %}
+        <li>{{ book.title}}, (Rating: {{ book.rating}})</li>
+        {% endfor %}
     </ul>
    
        

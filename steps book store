@@ -146,11 +146,16 @@ step 6.1: 85: Bulk Operations
     You can create multiple model instances (i.e. database records) at once: https://docs.djangoproject.com/en/3.0/ref/models/querysets/#bulk-create
 
 step 7: 86: create template, add view, urls file edit project urls.py file
-step 7.1: create base.html file
-step 7.2: create index.html
-step 7.3: create detail_book.html
-step 7.4: add index function in view.py file
-step 7.5: create urls.py file inside app and add urlpatterns, path
-step 7.6: in project urls.py file include path of app urls.py file using include function
-step 7.7: now run the server.
+    step 7.1: create base.html file
+    step 7.2: create index.html
+    step 7.3: create detail_book.html
+    step 7.4: add index function in view.py file
+    step 7.5: create urls.py file inside app and add urlpatterns, path
+    step 7.6: in project urls.py file include path of app urls.py file using include function
+    step 7.7: now run the server.
+
+step 8: 87: render index page and list all book
+step 8.1: In app, views.py import model and add sql quary to list all the book.
+step 8.1: In index.html use for loop and dynamicly generate list of all the book.
+
 
