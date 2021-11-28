@@ -15,4 +15,4 @@ class Book(models.Model):
 
 
     def __str__(self):
-        return f'{self.title},({self.rating})'
+        return f'{self.title},({self.rating}), {self.author},{self.is_bestselling}'

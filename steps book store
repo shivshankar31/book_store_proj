@@ -54,3 +54,86 @@ step 4.3: run below commands in shell to view the entries we created, we can use
     >>> Book.objects.all()[1].author
     >>> Book.objects.all()[1].is_bestselling
         False
+
+78: Blank vs Null : blank will store empty str, null will be no data like no data empty datatype is stored, by default sql will not allow empty field, so we need to exesplitly mention the null=true. 
+
+step 5: 79, 80, 81, 83, 84: all(), save(), delete(), create(), get(), filter(), '|' or,  good code.
+step 5.1: add, verify, save date to the field. (note: save() will perform update and save to database) 
+    >>> harry_potter = Book.objects.all()[0] --- assigning to new variable using index.
+    >>> harry_potter.title --- using '.'followed by field name, accessing the value 
+        "Harry Potter and the Philosopher's Stone"
+    >>> lordofrings = Book.objects.all()[1]
+    >>> lordofrings.title
+        'Lord of the rings - Volume One'
+    >>> harry_potter.author = 'J.K. Rowling' --- adding author 
+    >>> harry_potter.is_bestselling = True --- adding bestselling
+    >>> lordofrings.author = "Shiv"
+    >>> lordofrings.is_bestselling = True
+    >>> harry_potter.save() --- save the changes to DB 
+    >>> lordofrings.save()
+    >>> Book.objects.all()[0].author --- view the change we made into the DB
+        'J.K. Rowling'
+    >>> Book.objects.all()[1].author
+        'Shiv'
+    >>> Book.objects.all()[1].is_bestselling
+        True
+    >>> Book.objects.all()[0].is_bestselling
+        True
+
+step 5.2: delete() is used to delete date or row from the DB
+    >>> harry_potter = Book.objects.all()[0] --- assign to variable
+    >>> harry_potter.title --- verify
+        "Harry Potter and the Philosopher's Stone"
+    >>> harry_potter.delete() --- delete 
+        (1, {'book_outlet.Book': 1})
+
+step 5.3: add new books without instating variable using create()
+    >>> Book.objects.create(title = "New book", rating = 3, author = "R.J. Kumar", is_bestselling = True)
+        <Book: New book,(3)>
+    >>> Book.objects.create(title = "Life is not alown", rating = 4, author = "Joann Yashica", is_bestselling = True)
+        <Book: Life is not alown,(4)>
+    >>> Book.objects.create(title = "chase the chalenge", rating = 2, author = "Arokia Kavi Great", is_bestselling = True)
+        <Book: chase the chalenge,(2)>
+    >>> Book.objects.all() --- view and confirm creation
+        <QuerySet [<Book: Lord of the rings - Volume One,(4), Shiv,True>, <Book: New book,(3), R.J. Kumar,True>, <Book: Life is not alown,(4), Joann Yashica,True>, <Book: chase the chalenge,(2), Arokia Kavi Great,True>]>
+
+step 5.4: get() used to get only unique value from a table example id. we can use all field name get(id=3), get(title="")
+    >>> Book.objects.get(id=4)
+        <Book: Life is not alown,(4), Joann Yashica,True>
+    >>> Book.objects.get(title = 'Life is not alown')
+        <Book: Life is not alown,(4), Joann Yashica,True>
+
+step 5.5: filter() used to get multiple result. we can use two arg in same filter it use's "and" "__lte" -- lesser than equal, "__contain='life'" string is case sensitive for other SQl but not for sqllite ,  we can learn more filters in django (field lookups) official doc.
+    >>> Book.objects.filter(is_bestselling = True)
+        <QuerySet [<Book: Lord of the rings - Volume One,(4), Shiv,True>, <Book: New book,(3), R.J. Kumar,True>, <Book: Life is not alown,(4), Joann Yashica,True>, <Book: chase the chalenge,(2), Arokia Kavi Great,True>]>
+    >>> Book.objects.filter(rating__lte=4)
+        <QuerySet [<Book: Lord of the rings - Volume One,(4), Shiv,True>, <Book: New book,(3), R.J. Kumar,True>, <Book: Life is not alown,(4), Joann Yashica,True>, <Book: chase the chalenge,(2), Arokia Kavi Great,True>]>
+    >>> Book.objects.filter(rating__lte=4)
+        <QuerySet [<Book: Lord of the rings - Volume One,(4), Shiv,True>, <Book: New book,(3), R.J. Kumar,True>, <Book: Life is not alown,(4), Joann Yashica,True>, <Book: chase the chalenge,(2), Arokia Kavi Great,True>]>
+    >>> Book.objects.filter(title__contains="Life", rating__lte=4) 
+        <QuerySet [<Book: Life is not alown,(4), Joann Yashica,True>]>
+
+step 5.6: To perform "or" in the filter we need to import - "from djang.db.models import Q"
+    >>> Book.objects.filter(Q(rating = 3)|Q(title__contains = 'life')) --- statement is show book contain rating =3 and title contain the word 'life'
+        <QuerySet [<Book: New book,(3), R.J. Kumar,True>, <Book: Life is not alown,(4), Joann Yashica,True>]>
+
+Note: we can use or which represent '|' & and which represent ',' in the same filter as mentinon below.
+    Book.objects.filter(Q(rating = 3)|Q(title__contains = 'life'), is_bestselling=True)
+    <QuerySet [<Book: New book,(3), R.J. Kumar,True>, <Book: Life is not alown,(4), Joann Yashica,True>]>
+Note: we can use "and" without raping inside Q(), but it should be added at the last. if you are using in the middle then you should repeit with Q().
+
+step 5.6: how to increase performance?
+    To increase the performance we need to assing the filter to a variable, so once we run the code it will save the request in catch memory, so it will not hit the DB again and again.
+    >>> rated_book = Book.objects.filter(Q(rating = 3)|Q(title__contains = 'life'), is_bestselling=True)
+    >>> print(rated_book)
+        <QuerySet [<Book: New book,(3), R.J. Kumar,True>, <Book: Life is not alown,(4), Joann Yashica,True>]
+
+    we can also assign previously assigned variable to another variable adding more filter to it.
+    >>> rated = Book.objects.filter(rating__gt = 3)
+    >>> tit = rated.filter(title__contains="life")
+    >>> print(tit)
+        <QuerySet [<Book: Life is not alown,(4), Joann Yashica,True>]>
+which is a bad code? the code which is not using catch, mean code which hit again and again for same result.
+
+
+
