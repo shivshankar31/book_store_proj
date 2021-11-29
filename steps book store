@@ -217,3 +217,7 @@ prepopulated allowes to generate slug automaticlay, so now we can remove save re
 this also allow user to edit slug on their comfort.
     step 16.1: add BookAdmin class, here (ModelAdmin) you can allow some fields to make read only editable etc. poplated_field used to auto populate 
     step 16.2: now the save redefine can be removed because it is populated at admin.py file.
+
+step 17: 100: list_display, list_filter 
+    step 17.1: list_display added to admin.py which adds fields to display.
+    step 17.2 : list_filter added to admin.py which adds filters.
