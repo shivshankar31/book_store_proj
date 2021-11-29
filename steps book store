@@ -46,7 +46,7 @@ step 3.2: now to view the entries that we made run below command, "objects.all()
 
 step 4: 77: adding more field, setting validators, default value
 step 4.1: In models.py, define __str__ with f string to view the book entries, to view the entries you have the quit the shell and reload.
-step 4.2: now we have added new fileds author and is bestselling also set validator to rating by importing max and minlenghtvalidator, now run "makemigrations" and new file 0003 will be created. run "migrate" to add in the DB
+step 4.2: now we have added new fileds author and is bestselling also set validator to rating by importing max and minvaluevalidator, now run "makemigrations" and new file 0003 will be created. run "migrate" to add in the DB
 step 4.3: run below commands in shell to view the entries we created, we can used index, '.' field name to view the entry etc.
     >>> from book_outlet.models import Book
     >>> Book.objects.all()
@@ -198,3 +198,16 @@ step 13: 92: find total book, avg rating, shorting
     step 13.4: In index.html file insert the total and avg key
 
 
+Section 7: Admin
+
+step 14: 96: create super user account
+    step 14.1: using "python3 manage.py createsuperuser" create user account for administrator to manage the models.
+    step 14.1: run the server and /admin/ and login to the admin backend panel.
+
+step 15: 97, 98: add model to admin panel, blank, editable, correction on validator
+    step 15.1: in app admin.py file add "admin.site.register(Book)", which allow us to access in admin panel. 
+    step 15.2: in step 4.2 insted of maxvaluvalidator i woringly entered maxlengthvalidator, now it is corrected.
+Note: As if now we need to enter atleast dummy data in slug field to save the new book entry. to avoide that there are multiple ways to do that.
+        1. blank = True - if we pass this on the slug field in models.py file - it allows empty feild. 
+        2. editable = False - this remove the field from the add page.
+    step 15.3: In models.py, slug feild pass blank = True amd editable = False and check
