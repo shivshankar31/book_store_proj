@@ -211,3 +211,9 @@ Note: As if now we need to enter atleast dummy data in slug field to save the ne
         1. blank = True - if we pass this on the slug field in models.py file - it allows empty feild. 
         2. editable = False - this remove the field from the add page.
     step 15.3: In models.py, slug feild pass blank = True amd editable = False and check
+
+step 16: 99: configure BookAdmin class, readonly_field, prepopulated_field, ModelAdmin module
+prepopulated allowes to generate slug automaticlay, so now we can remove save redefine from modules.py file.
+this also allow user to edit slug on their comfort.
+    step 16.1: add BookAdmin class, here (ModelAdmin) you can allow some fields to make read only editable etc. poplated_field used to auto populate 
+    step 16.2: now the save redefine can be removed because it is populated at admin.py file.

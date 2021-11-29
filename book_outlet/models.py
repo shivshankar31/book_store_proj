@@ -8,6 +8,10 @@
 # step 12.3: change get_absolute_url function args to self.slug
 # step 12.4: add "db_index = True" to the slug field, it will increases the performance. index can be used where you use it more just to increase the performance.
 # step 15.3: In models.py, slug feild pass blank = True amd editable = False and check
+# step 16.2: now the save redefine can be removed because it is populated at admin.py file.
+
+
+
 
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
@@ -20,15 +24,15 @@ class Book(models.Model):
     rating = models.IntegerField(validators=[ MinValueValidator(1),MaxValueValidator(5)])
     author = models.CharField(null = True,max_length=50)
     is_bestselling = models.BooleanField(default= False)
-    slug = models.SlugField(default="", blank = True, editable= False, null= False, db_index=True)
+    slug = models.SlugField(default="", blank = True, null= False, db_index=True)
 
     def get_absolute_url(self):
         return reverse("details_book", args=[self.slug])
 
     
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super().save(*args, *kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(self.title)
+    #     super().save(*args, *kwargs)
     
     def __str__(self):
         return f'{self.title},({self.rating}), {self.author},{self.is_bestselling}'
