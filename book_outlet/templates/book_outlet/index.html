@@ -1,6 +1,7 @@
 <!step 7.2: create index.html!>
 <!step 8.1: In index.html use for loop and dynamicly generate list of all the book.!>
-
+<!step 10.2: In index add url tag - method 1!>
+<! step 10.4: assing the get_absolute_url to index.html - method 2!>
 {% extends 'book_outlet/base.html' %}
 
 
@@ -10,7 +11,8 @@
 {% block content %}
     <ul>
         {% for book in books %}
-        <li>{{ book.title}}, (Rating: {{ book.rating}})</li>
+        <!href ="{% url 'details_book' book.id %}"!>
+        <li><a href ="{{ book.get_absolute_url }}"> {{ book.title}} </a>, (Rating: {{ book.rating}})</li>
         {% endfor %}
     </ul>
    

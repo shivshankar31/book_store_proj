@@ -164,4 +164,11 @@ step 9.2: In app/view.py create function and return the value
 step 9.3: In urls.py assign the path for the new function
 step 9.4: add try block in view.py to return http404 page, there are two ways, 1.usual try block, 2. using get_object_or_404 function. 
 
+step 10: 89: add url to book title in index page
+There are two methods, methode 1 is adding url tag:
+step 10.1: in urls.py add name to detail_book and also add id as int.
+step 10.2: In index add url tag 
 
+method 2: define get_absolute_url in models.py and add to index.html
+step 10.3: In models.py add get_absolute_url function and point url name.
+step 10.4: assing the get_absolute_url to index.html
