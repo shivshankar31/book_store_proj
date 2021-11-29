@@ -1,1 +1,20 @@
 <!step 7.3: create detail_book.html!>
+<!step 9.1: creat block in detail_book.html file!>
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+    <h1> {{ title }}</h1>
+    <h2> {{ author }} </h2>
+    <p> This book is rated {{ rating }} </p>
+
+    {% if is_bestselling %}
+    This is a Bestselling Book!
+    {% else %}
+    This is'nt Bestselling Book!
+    {% endif %}
+
+{% endblock content %}
+
+
+

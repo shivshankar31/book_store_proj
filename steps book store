@@ -158,4 +158,9 @@ step 8: 87: render index page and list all book
 step 8.1: In app, views.py import model and add sql quary to list all the book.
 step 8.1: In index.html use for loop and dynamicly generate list of all the book.
 
+step 9: 88: working on detail_book.html page, create function in view
+step 9.1: creat block in detail_book.html file
+step 9.2: In app/view.py create function and return the value
+step 9.2: In urls.py assign the path for the new function
+
 
