@@ -1,7 +1,9 @@
 <!step 7.2: create index.html!>
 <!step 8.1: In index.html use for loop and dynamicly generate list of all the book.!>
 <!step 10.2: In index add url tag - method 1!>
-<! step 10.4: assing the get_absolute_url to index.html - method 2!>
+<!step 10.4: assing the get_absolute_url to index.html - method 2!>
+<!step 13.4: In index.html file insert the total and avg key!>
+
 {% extends 'book_outlet/base.html' %}
 
 
@@ -16,5 +18,9 @@
         {% endfor %}
     </ul>
    
+   <hr>
+
+   <p> Total number of Books: {{ total_book }}</p>
+   <p> Average Rating for the total books: {{ avg_rating.rating__avg }}</p>
        
 {% endblock content %}

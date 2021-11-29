@@ -191,6 +191,10 @@ step 12: 91: apply the created slug
         Now refresh the page, url will use the slug value.
     step 12.4: add "db_index = True" to the slug field, it will increases the performance. index can be used where you use it more just to increase the performance.
 
-
+step 13: 92: find total book, avg rating, shorting 
+    step 13.1: find total using count() method in views.py
+    step 13.2: find average using aggregate Avg() model in views.py
+    step 13.3: sort the book list using order_by function in views.py
+    step 13.4: In index.html file insert the total and avg key
 
 
