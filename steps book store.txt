@@ -233,3 +233,32 @@ CASCADE - if author deleted, it will delete related book as well
 protect - if there is some related data it wont allow to delete.
 set_null - if deleted it will set the field to empty
     step 18.3: makemigrations and migrate the changes
+
+step 19: 105: working with relationships using python shell, create new book using author class
+    step 19.1: call author class and create firstname and lastname
+        >>> from book_outlet.models import Book, Author
+        >>> shivs = Author(first_name = "shiv", last_name = "shankar")
+        >>> shivs.save()
+    Verify created objects:
+        >>> Author.objects.all()[0].first_name
+            'shiv'
+    >>> Author.objects.all()[0].last_name
+            'shankar'
+    step 19.2: create new book and verify
+        >>> New_book1 = Book(title = 'new title', rating = 4, is_bestselling = True, author = shivs)
+        >>> New_book1.save()
+        >>> Book.objects.all()
+            <QuerySet [<Book: new title,(4), Author object (1),True>]>
+    step 19.3: using get() save the created book to a variable and you can see for the author field an object is pointed.
+        >>> New_bo = Book.objects.get(title = 'new title')
+        >>> New_bo.author
+            Author: Author object (1)>
+        >>> New_bo.rating
+            4
+        >>> New_bo.is_bestselling
+            True
+        To verify author object
+        >>> New_bo.author.first_name
+            'shiv'
+        >>> New_bo.author.last_name
+            'shankar'
