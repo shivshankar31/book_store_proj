@@ -221,3 +221,15 @@ this also allow user to edit slug on their comfort.
 step 17: 100: list_display, list_filter 
     step 17.1: list_display added to admin.py which adds fields to display.
     step 17.2 : list_filter added to admin.py which adds filters.
+
+
+Section 8: Relationships
+types of relationships are 1.one to many , 2. many to many, 3.  one to one
+
+step 18: 104: create author class, and use model.forignkey
+    step 18.1: add Author class with first name and last name feild in models.py.
+    step 18.2: replace author field in Book class using "model.foreignkey(Author, on-delete= CASCADE, null=true". 
+CASCADE - if author deleted, it will delete related book as well
+protect - if there is some related data it wont allow to delete.
+set_null - if deleted it will set the field to empty
+    step 18.3: makemigrations and migrate the changes
