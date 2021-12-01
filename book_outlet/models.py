@@ -12,6 +12,7 @@
 # step 18.1: add Author class with first name and last name feild in models.py.
 # step 18.2: replace author field in Book class using "model.foreignkey(Author, on-delete= CASCADE, null=true". 
 # step 18.3: run makemigrations and migrate the changes (delete all old records, because it will show some error as we change the schema)
+# step 20.3: related_name , where we can specify our own name for model.forignkey. In models.py add related__name
 
 
 from django.db import models
@@ -29,7 +30,7 @@ class Author(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=50)
     rating = models.IntegerField(validators=[ MinValueValidator(1),MaxValueValidator(5)])
-    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name= 'xyz')
     is_bestselling = models.BooleanField(default= False)
     slug = models.SlugField(default="", blank = True, null= False, db_index=True)
 

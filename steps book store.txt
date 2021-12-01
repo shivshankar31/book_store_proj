@@ -262,3 +262,38 @@ step 19: 105: working with relationships using python shell, create new book usi
             'shiv'
         >>> New_bo.author.last_name
             'shankar'
+
+step 20: 106: cross model queries, set, related__name, apply multiple modifiers 
+    step 20.1: filter all books by author name
+    >>> book_by_author = Book.objects.filter(author__first_name = 'shiv')
+    >>> book_by_author
+        <QuerySet [<Book: new title,(4), Author object (1),True>]>
+we can use multiple modifiers in the same filter
+    >>> book_by_author = Book.objects.filter(author__first_name__contains = 'sh')
+    >>> book_by_author
+        <QuerySet [<Book: new title,(4), Author object (1),True>]>
+    step 20.2: create query using author object, if we need to get the books writern by author
+get object from author
+    >>> shiv = Author.objects.get(first_name = 'shiv')
+    >>> shiv
+        <Author: Author object (1)>
+how to access book field from author query?
+there is no book field on author, but djano automaticly create for us using set, it will take the Book class name and turns into lowercase automaticly.
+    >>> shiv.book_set
+        <django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x7f5623de3f70>
+    >>> shiv.book_set.all()
+        <QuerySet [<Book: new title,(4), Author object (1),True>]>
+the above can be achived by another way using related__name:
+    step 20.3: related_name , where we can specify our own name for model.forignkey. In models.py add related__name
+    step 20.4: makemigration and migrate to save the changes
+    step 20.5: 
+    shiv_book = Author.objects.get(first_name = "shiv")
+    >>> shiv_book
+        <Author: Author object (1)>
+    >>> shiv_book.xyz.filter(rating__lte = 5)
+        <QuerySet [<Book: new title,(4), Author object (1),True>]>
+
+
+
+
+    
