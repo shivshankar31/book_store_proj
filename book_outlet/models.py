@@ -15,6 +15,8 @@
 # step 20.3: related_name , where we can specify our own name for model.forignkey. In models.py add related__name
 # step 21.3: redefine __str__function using f' ' string in order to display the object in admin panel
 # step 21.4: we can also create a templet function as fullname so that we can use it some other place as well 
+# step 22.1: create Address class with stree, postcode, location and country in models.py file
+# step 22.6: add nested Meta class to display Address correctly in admin panel. django will always take the model name and add 's' at the end in models.py
 
 
 from django.contrib.admin.decorators import display
@@ -25,11 +27,19 @@ from django.urls import reverse
 from django.utils.text import slugify
 # Create your models here.
 
+class Address(models.Model):
+    stree = models.CharField(max_length=50)
+    postalcode = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    country = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name_plural = "Address Master"
 
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    
+    address = models.OneToOneField(Address,on_delete=models.CASCADE, null=True)
     # method 1:step 21.3
     #def __str__(self):
     #    return f'{self.first_name} {self.last_name}'

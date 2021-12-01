@@ -300,3 +300,27 @@ step 21: 107 register author to admin pannel and display fullname
     step 21.4: we can also create a templet function as fullname so that we can use it some other place as well model.py file
 
     
+step: 22: 108, 109, 110: create address class, add data to new and old author, Class Meta
+    step 22.1: create Address class with stree, postcode, location and country in models.py file
+    step 22.2: makemigration and migrate
+    step 22.3: open shell and add address data
+        >>> shiv_add = Address(stree = 'R.S.Puram', postalcode ='641014', city='coimbatore', country = 'India')
+        >>> shiv_add.save()
+        >>> joann_add = Address(stree = 'chapple street', postalcode ='LU1 5DD', city='luton', country = 'UnitedKigdom')
+        >>> joann_add.save()
+To verify:
+        >>> Address.objects.all()
+            <QuerySet [<Address: Address object (1)>, <Address: Address object (2)>]>
+        >>> Address.objects.all()[0]
+            <Address: Address object (1)>
+        >>> Address.objects.all()[0].stree
+            'R.S.Puram'
+    step 22.4: assign the created address object to existing author or create new book and add the address later, as we sent the field to null.
+        >>> shivadd = Author.objects.get(first_name = "shiv")
+        >>> shivadd.address = shiv_ad
+        >>> shivadd.save()
+        joanadd = Author.objects.get(first_name = 'Joann')
+        >>> joanadd.address = joann_add
+        >>> joanadd.save()
+    step 22.5: register addres site to admin.py file, also add AddressAdmin to display properly
+    step 22.6: add nested Meta class to display Address correctly in admin panel. django will always take the model name and add 's' at the end in models.py
