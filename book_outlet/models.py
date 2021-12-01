@@ -17,6 +17,9 @@
 # step 21.4: we can also create a templet function as fullname so that we can use it some other place as well 
 # step 22.1: create Address class with stree, postcode, location and country in models.py file
 # step 22.6: add nested Meta class to display Address correctly in admin panel. django will always take the model name and add 's' at the end in models.py
+# step 23.1: many to many: create a class Location and name and code field. 
+# step 23.2: add location class as a field in book class and call relative field as many to many and add the class as argument.
+
 
 
 from django.contrib.admin.decorators import display
@@ -26,6 +29,10 @@ from django.db.models.deletion import CASCADE
 from django.urls import reverse 
 from django.utils.text import slugify
 # Create your models here.
+
+class Location(models.Model):
+    name = models.CharField(max_length=50)
+    code = models.CharField(max_length=2)
 
 class Address(models.Model):
     stree = models.CharField(max_length=50)
@@ -57,6 +64,8 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name= 'xyz')
     is_bestselling = models.BooleanField(default= False)
     slug = models.SlugField(default="", blank = True, null= False, db_index=True)
+    location = models.ManyToManyField(Location)
+
 
     def get_absolute_url(self):
         return reverse("details_book", args=[self.slug])

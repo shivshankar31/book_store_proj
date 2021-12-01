@@ -324,3 +324,10 @@ To verify:
         >>> joanadd.save()
     step 22.5: register addres site to admin.py file, also add AddressAdmin to display properly
     step 22.6: add nested Meta class to display Address correctly in admin panel. django will always take the model name and add 's' at the end in models.py
+
+step: 23: 101: set up many to many
+    step 23.1: many to many: create a class Location and name and code field in models.py file. 
+    step 23.2: add location class as a field in book class and call relative field as many to many and add the class as argument in models.py file.
+    step 23.3: make migrations and migrate, now its ready for many to manage.py
+
+
