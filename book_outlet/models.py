@@ -13,8 +13,11 @@
 # step 18.2: replace author field in Book class using "model.foreignkey(Author, on-delete= CASCADE, null=true". 
 # step 18.3: run makemigrations and migrate the changes (delete all old records, because it will show some error as we change the schema)
 # step 20.3: related_name , where we can specify our own name for model.forignkey. In models.py add related__name
+# step 21.3: redefine __str__function using f' ' string in order to display the object in admin panel
+# step 21.4: we can also create a templet function as fullname so that we can use it some other place as well 
 
 
+from django.contrib.admin.decorators import display
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models.deletion import CASCADE
@@ -26,6 +29,17 @@ from django.utils.text import slugify
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
+    
+    # method 1:step 21.3
+    #def __str__(self):
+    #    return f'{self.first_name} {self.last_name}'
+
+    # method 2 : step 21.4
+    def fullname(self):
+        return f'{self.first_name} {self.last_name}'
+
+    def __str__(self):
+        return self.fullname()
 
 class Book(models.Model):
     title = models.CharField(max_length=50)

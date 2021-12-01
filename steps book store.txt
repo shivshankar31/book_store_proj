@@ -293,7 +293,10 @@ the above can be achived by another way using related__name:
     >>> shiv_book.xyz.filter(rating__lte = 5)
         <QuerySet [<Book: new title,(4), Author object (1),True>]>
 
-
-
+step 21: 107 register author to admin pannel and display fullname 
+    step 21.1: admin panel asccess to new class "admin.site.register(Author)" in admin.py file
+    step 21.2: create class for Author and try adding display and filter n admin.py file
+    step 21.3: redefine __str__function using f' ' string in order to display the object in admin panel in model.py file
+    step 21.4: we can also create a templet function as fullname so that we can use it some other place as well model.py file
 
     
