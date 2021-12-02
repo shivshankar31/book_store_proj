@@ -33,6 +33,21 @@ from django.utils.text import slugify
 class Location(models.Model):
     name = models.CharField(max_length=50)
     code = models.CharField(max_length=2)
+    
+    class Meta:
+        verbose_name_plural = "location Published"
+
+    def __str__(self):
+        return f'{ self.name}, {self.code}'
+    
+    # this save method helps to save the country name as first letter in uppercase  and code in uppercase 
+    def save(self, *args, **kwargs):
+        self.name = self.name.capitalize()
+        self.code = self.code.upper()
+        super().save(*args, *kwargs)
+    
+
+    
 
 class Address(models.Model):
     stree = models.CharField(max_length=50)
@@ -42,6 +57,10 @@ class Address(models.Model):
 
     class Meta:
         verbose_name_plural = "Address Master"
+    
+    def __str__(self):
+        return f'{ self.stree}, {self.postalcode}, {self.city}, {self.country}'
+    
 
 class Author(models.Model):
     first_name = models.CharField(max_length=50)
@@ -64,7 +83,8 @@ class Book(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, related_name= 'xyz')
     is_bestselling = models.BooleanField(default= False)
     slug = models.SlugField(default="", blank = True, null= False, db_index=True)
-    location = models.ManyToManyField(Location)
+    location = models.ManyToManyField(Location) # insted of book_set, using related_name create different name to access.
+
 
 
     def get_absolute_url(self):

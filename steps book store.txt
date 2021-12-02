@@ -331,3 +331,30 @@ step: 23: 101: set up many to many
     step 23.3: make migrations and migrate, now its ready for many to manage.py
 
 
+step:24: 112: many to many relationship, create, add data, add to admin panel
+    step 24.1: access shell and check the location field to know the field is added or not.
+    >>> from book_outlet.models import Location, Book
+    >>> lo = Book.objects.all()[0]
+    >>> lo.location
+        <django.db.models.fields.related_descriptors.create_forward_many_to_many_manager.<locals>.ManyRelatedManager object at 0x7fb30a137400>
+
+    step 24.2: create and add, here as like others we cannot assign the location to existing book, we need to use add() method event its a new book.
+    >>> india = Location(name = 'india', code = 'in')
+    >>> india.save()
+    >>> new.location.add(india)
+    >>> new.save()
+    >>> new.location.filter(code = 'in')
+        <QuerySet [<Location: Location object (1)>]>
+    
+    step 24.3: as one to one django create _set automaticly to quary other way.
+    >>> ind = Location.objects.all()[0]
+    >>> ind.book_set.all()
+        <QuerySet [<Book: new title,(4), shiv shankar,True>]>
+    step 24.4: optional: insted of book_set, using related_name create different name to access.
+    step 24.5: add to admin panel.
+
+step: 25: 114: additional relationship models.
+    1. circular relationship
+    2. relation with same model
+    3. relationship with other apps. check the below official doc for more info
+    https://docs.djangoproject.com/en/3.2/ref/models/fields/#module-django.db.models.fields.related

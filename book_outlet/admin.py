@@ -5,10 +5,11 @@
 # step 21.1: admin panel asccess to new class "admin.site.register(Author)"
 # step 21.2: create class for Author and try adding display and filter
 # step 22.5: register addres site to admin.py file, also add AddressAdmin to display properly
-
+# step 24.5: register to admin panel in admin.py file.
 
 from django.contrib import admin
-from .models import Book, Author,Address
+from django.contrib.admin.filters import ListFilter
+from .models import Book, Author,Address, Location
 
 # Register your models here.
 
@@ -27,10 +28,13 @@ class AddressAdmin(admin.ModelAdmin):
     list_display=('stree', 'postalcode', 'city', 'country')
 
     
-
+class LocationAdmin(admin.ModelAdmin):
+    #list_display = ('name', 'code',)
+    list_Filter = ('code',)
 
 
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Address ,AddressAdmin)
+admin.site.register(Location,LocationAdmin)
